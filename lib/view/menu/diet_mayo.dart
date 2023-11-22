@@ -6,25 +6,25 @@ import '../../common_widget/menu_item_row2.dart';
 import '../more/my_order_view2.dart';
 import 'item_details_view2.dart';
 
-class DietKetoView extends StatefulWidget {
-  const DietKetoView({Key? key}) : super(key: key);
+class DietMayoView extends StatefulWidget {
+  const DietMayoView({Key? key}) : super(key: key);
 
   @override
-  _DietKetoViewState createState() => _DietKetoViewState();
+  _DietMayoViewState createState() => _DietMayoViewState();
 }
 
-class _DietKetoViewState extends State<DietKetoView> {
+class _DietMayoViewState extends State<DietMayoView> {
   TextEditingController txtSearch = TextEditingController();
 
-  List dietKetoItemsArr = [
+  List dietMayoItemsArr = [
     {
-      "image": "assets/img/keto_food1.png",
-      "name": "Avocado and Bacon Salad",
+      "image": "assets/img/Mayo_food1.png",
+      "name": "Zucchini Noodles with Pesto",
       "description":
-          "Diet keto atau diet ketogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet keto, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet Mayo atau diet Mayogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet Mayo, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
       "rate": "4.8",
       "rating": "120",
-      "type": "Keto Kitchen",
+      "type": "Mayo Kitchen",
       "food_type": "Lunch",
       "nutrition": [
         "Calories: 300",
@@ -41,13 +41,13 @@ class _DietKetoViewState extends State<DietKetoView> {
       },
     },
     {
-      "image": "assets/img/keto_food1.png",
-      "name": "Grilled Salmon with Asparagus",
+      "image": "assets/img/Mayo_food1.png",
+      "name": "Turkey and Veggie Skewers",
       "description":
-          "Diet keto atau diet ketogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet keto, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet Mayo atau diet Mayogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet Mayo, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
       "rate": "4.9",
       "rating": "130",
-      "type": "Keto Kitchen",
+      "type": "Mayo Kitchen",
       "food_type": "Dinner",
       "nutrition": [
         "Calories: 400",
@@ -64,13 +64,13 @@ class _DietKetoViewState extends State<DietKetoView> {
       },
     },
     {
-      "image": "assets/img/keto_food1.png",
-      "name": "Zucchini Noodles with Pesto",
+      "image": "assets/img/Mayo_food1.png",
+      "name": "Eggplant Lasagna",
       "description":
-          "Diet keto atau diet ketogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet keto, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet Mayo atau diet Mayogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet Mayo, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
       "rate": "4.7",
       "rating": "110",
-      "type": "Keto Kitchen",
+      "type": "Mayo Kitchen",
       "food_type": "Dinner",
       "nutrition": [
         "Calories: 250",
@@ -86,7 +86,7 @@ class _DietKetoViewState extends State<DietKetoView> {
         "30_days": 280000,
       },
     },
-    // Add more keto diet items as needed
+    // Add more Mayo diet items as needed
   ];
 
   @override
@@ -119,7 +119,7 @@ class _DietKetoViewState extends State<DietKetoView> {
                     ),
                     Expanded(
                       child: Text(
-                        "Keto Diet Menu", // Change the title accordingly
+                        "Mayo Diet Menu", // Change the title accordingly
                         style: TextStyle(
                           color: TColor.primaryText,
                           fontSize: 20,
@@ -171,9 +171,9 @@ class _DietKetoViewState extends State<DietKetoView> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
-                itemCount: dietKetoItemsArr.length,
+                itemCount: dietMayoItemsArr.length,
                 itemBuilder: ((context, index) {
-                  var mObj = dietKetoItemsArr[index] as Map? ?? {};
+                  var mObj = dietMayoItemsArr[index] as Map? ?? {};
                   return MenuItemRow(
                     mObj: mObj,
                     onTap: () {

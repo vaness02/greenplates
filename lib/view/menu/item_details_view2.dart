@@ -33,6 +33,34 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
     originalPrice = widget.menuItem['price'] ?? 0;
   }
 
+  Widget _buildDescription() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Description",
+            style: TextStyle(
+              color: TColor.primaryText,
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            widget.menuItem["description"],
+            style: TextStyle(
+              color: TColor.secondaryText,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Scaffold(
@@ -40,6 +68,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
+          _buildDescription(),
           Image.asset(
             widget.menuItem["image"],
             width: media.width,
@@ -76,6 +105,9 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 25),
@@ -163,7 +195,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 15,
+                                height: 8,
                               ),
                               Padding(
                                 padding:
@@ -177,20 +209,24 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 8,
+                                height: 15,
                               ),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 25),
                                 child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare leo non mollis id cursus. Eu euismod faucibus in leo malesuada",
+                                  widget.menuItem["description"],
                                   style: TextStyle(
-                                      color: TColor.secondaryText,
-                                      fontSize: 12),
+                                    color: TColor.secondaryText,
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                               const SizedBox(
-                                height: 20,
+                                height: 8,
+                              ),
+                              const SizedBox(
+                                height: 10,
                               ),
                               Padding(
                                 padding:
@@ -224,6 +260,9 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                     ),
                                   ],
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 8,
                               ),
                               Padding(
                                   padding: const EdgeInsets.symmetric(

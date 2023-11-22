@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_textfield.dart';
 import 'package:food_delivery/view/menu/diet_keto.dart';
+import 'package:food_delivery/view/menu/diet_mayo.dart';
 import 'package:food_delivery/view/menu/menu_items_view.dart';
 
 import '../../common/globs.dart';
@@ -25,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
 
   List catArr = [
     {"image": "assets/img/breakfast1.png", "name": "Diet Keto"},
-    {"image": "assets/img/lunch1.png", "name": "Lunch"},
+    {"image": "assets/img/lunch1.png", "name": "Diet Mayo"},
     {"image": "assets/img/snacks1.png", "name": "Snacks"},
     {"image": "assets/img/dinner2.png", "name": "Dinner"},
   ];
@@ -203,7 +204,7 @@ class _HomeViewState extends State<HomeView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ViewAllTitleRow(
-                  title: "Food Delivery Plans",
+                  title: "Diet Plan Subscription",
                   onView: () {},
                 ),
               ),
@@ -211,37 +212,43 @@ class _HomeViewState extends State<HomeView> {
                 height: 30,
               ),
               SizedBox(
-  height: 120,
-  child: ListView.builder(
-    scrollDirection: Axis.horizontal,
-    padding: const EdgeInsets.symmetric(horizontal: 15),
-    itemCount: catArr.length,
-    itemBuilder: ((context, index) {
-      var cObj = catArr[index] as Map? ?? {};
-      return CategoryCell(
-        cObj: cObj,
-        onTap: () {
-          if (cObj["name"] == "Diet Keto") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DietKetoView(),
+                height: 120,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  itemCount: catArr.length,
+                  itemBuilder: ((context, index) {
+                    var cObj = catArr[index] as Map? ?? {};
+                    return CategoryCell(
+                      cObj: cObj,
+                      onTap: () {
+                        if (cObj["name"] == "Diet Keto") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DietKetoView(),
+                            ),
+                          );
+                        } else if (cObj["name"] == "Diet Mayo") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DietMayoView(),
+                            ),
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MenuItemsView(mObj: cObj),
+                            ),
+                          );
+                        }
+                      },
+                    );
+                  }),
+                ),
               ),
-            );
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MenuItemsView(mObj: cObj),
-              ),
-            );
-          }
-        },
-      );
-    }),
-  ),
-),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ViewAllTitleRow(
