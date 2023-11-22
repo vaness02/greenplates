@@ -3,6 +3,8 @@ import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_textfield.dart';
 import 'package:food_delivery/view/menu/diet_keto.dart';
 import 'package:food_delivery/view/menu/diet_mayo.dart';
+import 'package:food_delivery/view/menu/diet_atkin.dart';
+import 'package:food_delivery/view/menu/diet_south.dart';
 import 'package:food_delivery/view/menu/menu_items_view.dart';
 
 import '../../common/globs.dart';
@@ -27,8 +29,8 @@ class _HomeViewState extends State<HomeView> {
   List catArr = [
     {"image": "assets/img/breakfast1.png", "name": "Diet Keto"},
     {"image": "assets/img/lunch1.png", "name": "Diet Mayo"},
-    {"image": "assets/img/snacks1.png", "name": "Snacks"},
-    {"image": "assets/img/dinner2.png", "name": "Dinner"},
+    {"image": "assets/img/snacks1.png", "name": "Diet Atkin"},
+    {"image": "assets/img/dinner2.png", "name": "Diet South Beach"},
   ];
 
   List popArr = [
@@ -236,11 +238,18 @@ class _HomeViewState extends State<HomeView> {
                               builder: (context) => DietMayoView(),
                             ),
                           );
-                        } else {
+                        } else if (cObj["name"] == "Diet Atkin") {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MenuItemsView(mObj: cObj),
+                              builder: (context) => DietAtkinView(),
+                            ),
+                          );
+                        } else if (cObj["name"] == "Diet South Beach") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DietSouthView(),
                             ),
                           );
                         }

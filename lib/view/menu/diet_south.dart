@@ -6,26 +6,26 @@ import '../../common_widget/menu_item_row2.dart';
 import '../more/my_order_view2.dart';
 import 'item_details_view2.dart';
 
-class DietKetoView extends StatefulWidget {
-  const DietKetoView({Key? key}) : super(key: key);
+class DietSouthView extends StatefulWidget {
+  const DietSouthView({Key? key}) : super(key: key);
 
   @override
-  _DietKetoViewState createState() => _DietKetoViewState();
+  _DietSouthViewState createState() => _DietSouthViewState();
 }
 
-class _DietKetoViewState extends State<DietKetoView> {
+class _DietSouthViewState extends State<DietSouthView> {
   TextEditingController txtSearch = TextEditingController();
 
-  List dietKetoItemsArr = [
+  List dietSouthItemsArr = [
     {
-      "image": "assets/img/keto_food1.png",
-      "name": "Avocado and Bacon Salad",
+      "image": "assets/img/South_food1.jpg",
+      "name": "Shrimp and Broccoli Stir-fry",
       "description":
-          "Diet keto atau diet ketogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet keto, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet South adalah diet resmi yang dikembangkan oleh South Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.8",
       "rating": "120",
-      "type": "Keto Kitchen",
-      "food_type": "",
+      "type": "South Kitchen",
+      "food_type": "Lunch",
       "nutrition": [
         "Calories: 300",
         "Protein: 10g",
@@ -41,14 +41,14 @@ class _DietKetoViewState extends State<DietKetoView> {
       },
     },
     {
-      "image": "assets/img/keto_food2.jpg",
-      "name": "Grilled Salmon with Asparagus",
+      "image": "assets/img/South_food2.jpg",
+      "name": "Turkey and Veggie Skewers",
       "description":
-          "Diet keto atau diet ketogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet keto, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet South adalah diet resmi yang dikembangkan oleh South Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.9",
       "rating": "130",
-      "type": "Keto Kitchen",
-      "food_type": "",
+      "type": "South Kitchen",
+      "food_type": "Dinner",
       "nutrition": [
         "Calories: 400",
         "Protein: 30g",
@@ -64,14 +64,14 @@ class _DietKetoViewState extends State<DietKetoView> {
       },
     },
     {
-      "image": "assets/img/keto_food3.jpg",
-      "name": "Zucchini Noodles with Pesto",
+      "image": "assets/img/South_food3.jpg",
+      "name": "Eggplant Lasagna",
       "description":
-          "Diet keto atau diet ketogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet keto, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet South adalah diet resmi yang dikembangkan oleh South Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.7",
       "rating": "110",
-      "type": "Keto Kitchen",
-      "food_type": "",
+      "type": "South Kitchen",
+      "food_type": "Dinner",
       "nutrition": [
         "Calories: 250",
         "Protein: 8g",
@@ -86,7 +86,7 @@ class _DietKetoViewState extends State<DietKetoView> {
         "30_days": 280000,
       },
     },
-    // Add more keto diet items as needed
+    // Add more South diet items as needed
   ];
 
   @override
@@ -119,7 +119,7 @@ class _DietKetoViewState extends State<DietKetoView> {
                     ),
                     Expanded(
                       child: Text(
-                        "Keto Diet Menu", // Change the title accordingly
+                        "South Diet Menu", // Change the title accordingly
                         style: TextStyle(
                           color: TColor.primaryText,
                           fontSize: 20,
@@ -171,24 +171,17 @@ class _DietKetoViewState extends State<DietKetoView> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
-                itemCount: dietKetoItemsArr.length,
+                itemCount: dietSouthItemsArr.length,
                 itemBuilder: ((context, index) {
-                  var mObj =
-                      dietKetoItemsArr[index] as Map<String, dynamic>? ?? {};
+                  var mObj = dietSouthItemsArr[index] as Map? ?? {};
                   return MenuItemRow(
                     mObj: mObj,
                     onTap: () {
-                      var mObjCopy = Map<String, dynamic>.from(
-                          mObj); // Create a copy of mObj
-                      mObjCopy.remove(
-                          "food_type"); // Remove "food_type" from the copy
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ItemDetailsView(
-                            menuItem:
-                                mObjCopy, // Pass the copy to ItemDetailsView
-                          ),
+                              menuItem: mObj as Map<String, dynamic>),
                         ),
                       );
                     },

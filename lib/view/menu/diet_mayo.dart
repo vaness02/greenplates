@@ -18,14 +18,14 @@ class _DietMayoViewState extends State<DietMayoView> {
 
   List dietMayoItemsArr = [
     {
-      "image": "assets/img/Mayo_food1.png",
-      "name": "Zucchini Noodles with Pesto",
+      "image": "assets/img/mayo_food1.jpg",
+      "name": "Shrimp and Broccoli Stir-fry",
       "description":
-          "Diet Mayo atau diet Mayogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet Mayo, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet Mayo adalah diet resmi yang dikembangkan oleh Mayo Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.8",
       "rating": "120",
       "type": "Mayo Kitchen",
-      "food_type": "Lunch",
+      "food_type": "",
       "nutrition": [
         "Calories: 300",
         "Protein: 10g",
@@ -41,14 +41,14 @@ class _DietMayoViewState extends State<DietMayoView> {
       },
     },
     {
-      "image": "assets/img/Mayo_food1.png",
+      "image": "assets/img/mayo_food2.jpg",
       "name": "Turkey and Veggie Skewers",
       "description":
-          "Diet Mayo atau diet Mayogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet Mayo, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet Mayo adalah diet resmi yang dikembangkan oleh Mayo Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.9",
       "rating": "130",
       "type": "Mayo Kitchen",
-      "food_type": "Dinner",
+      "food_type": "",
       "nutrition": [
         "Calories: 400",
         "Protein: 30g",
@@ -64,14 +64,14 @@ class _DietMayoViewState extends State<DietMayoView> {
       },
     },
     {
-      "image": "assets/img/Mayo_food1.png",
+      "image": "assets/img/mayo_food3.jpg",
       "name": "Eggplant Lasagna",
       "description":
-          "Diet Mayo atau diet Mayogenik adalah diet yang dilakukan dengan cara menerapkan pola makan rendah karbohidrat, namun tinggi lemak. Metode diet ini kian populer karena dianggap cepat menurunkan berat badan. Dalam pola makan diet Mayo, konsumsi karbohidrat hanya sekitar 5 hingga 10 % saja dan sisanya digantikan dengan asupan lemak serta protein.",
+          "Diet Mayo adalah diet resmi yang dikembangkan oleh Mayo Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.7",
       "rating": "110",
       "type": "Mayo Kitchen",
-      "food_type": "Dinner",
+      "food_type": "",
       "nutrition": [
         "Calories: 250",
         "Protein: 8g",
