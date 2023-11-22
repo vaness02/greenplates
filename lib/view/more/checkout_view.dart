@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_button.dart';
-
+import 'package:provider/provider.dart';
+import 'package:food_delivery/models/cart_model.dart';
+import 'package:intl/intl.dart';
 import 'change_address_view.dart';
 import 'checkout_message_view.dart';
 
@@ -13,6 +15,9 @@ class CheckoutView extends StatefulWidget {
 }
 
 class _CheckoutViewState extends State<CheckoutView> {
+  final int deliveryCost = 50000;
+  final double discountRate = 0.10;
+  final formatter = NumberFormat("#,##0", "id_ID");
   List paymentArr = [
     {"name": "Cash on delivery", "icon": "assets/img/cash.png"},
     {"name": "**** **** **** 2187", "icon": "assets/img/visa_icon.png"},
@@ -23,6 +28,7 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartModel>(context);
     return Scaffold(
       backgroundColor: TColor.white,
       body: SingleChildScrollView(
@@ -229,7 +235,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "\$68",
+                          "Rp ${formatter.format(cart.getTotalPrice())}",
                           style: TextStyle(
                               color: TColor.primaryText,
                               fontSize: 13,
@@ -252,7 +258,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "\$2",
+                          "Rp ${formatter.format(deliveryCost)}",
                           style: TextStyle(
                               color: TColor.primaryText,
                               fontSize: 13,
@@ -275,7 +281,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "-\$4",
+                          "-Rp ${formatter.format(cart.getTotalPrice() * discountRate)}",
                           style: TextStyle(
                               color: TColor.primaryText,
                               fontSize: 13,
@@ -305,7 +311,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "\$66",
+                          "Rp ${formatter.format(cart.getTotalPrice() + deliveryCost - cart.getTotalPrice() * discountRate)}",
                           style: TextStyle(
                               color: TColor.primaryText,
                               fontSize: 15,

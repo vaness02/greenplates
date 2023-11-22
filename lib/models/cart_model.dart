@@ -34,7 +34,8 @@ class CartModel extends ChangeNotifier {
         meals = 2;
       }
 
-      totalPrice += (item['price'] * item['qty'] * days * meals) as int;
+      totalPrice += (item['price'] * item['quantity'] * days * meals)
+          as int; // Change 'qty' to 'quantity'
     }
     return totalPrice;
   }

@@ -37,14 +37,27 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
   }
 
   void addToCart() {
-    final cart = Provider.of<CartModel>(context, listen: false);
-    cart.addItem({
-      'name': widget.menuItem['name'],
-      'price': widget.menuItem['price'],
-      'qty': qty, // This is the number of portions
-      'subscriptionDay': _selectedSubscription,
-      'mealOption': _selectedMealOption,
-    });
+    if (_selectedSubscription == null || _selectedMealOption == null) {
+      // Show a message to the user to select the subscription and meal options
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please select subscription and meal options')),
+      );
+    } else {
+      final cart = Provider.of<CartModel>(context, listen: false);
+      if (qty != null && qty > 0) {
+        // Validate the qty value
+        cart.addItem({
+          'name': widget.menuItem['name'],
+          'price': widget.menuItem['price'],
+          'quantity': qty,
+          'subscriptionDay': _selectedSubscription,
+          'mealOption': _selectedMealOption,
+        });
+      } else {
+        // Handle the case where qty is null or not a valid numeric value
+        // You can show an error message to the user or handle it based on your application's logic
+      }
+    }
   }
 
   Widget _buildDescription() {

@@ -15,10 +15,15 @@ class MyOrderView extends StatefulWidget {
 }
 
 class _MyOrderViewState extends State<MyOrderView> {
+  final int deliveryCost = 50000; // Define delivery cost
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartModel>(context);
-
+    int totalPrice = cart.getTotalPrice() + deliveryCost;
+    String formattedDeliveryCost =
+        NumberFormat("#,##0", "id_ID").format(deliveryCost);
+    String formattedTotalPrice =
+        NumberFormat("#,##0", "id_ID").format(totalPrice);
     return Scaffold(
       backgroundColor: TColor.white,
       body: SingleChildScrollView(
@@ -62,13 +67,15 @@ class _MyOrderViewState extends State<MyOrderView> {
                 child: Row(
                   children: [
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          "assets/img/shop_logo.png",
-                          width: 80,
-                          height: 80,
-                          fit: BoxFit.cover,
-                        )),
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        "assets/img/app_logo.png",
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit
+                            .fill, // Use BoxFit.fill to ensure the image fits the container
+                      ),
+                    ),
                     const SizedBox(
                       width: 8,
                     ),
@@ -77,7 +84,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "King Burgers",
+                            "Diet Package",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: TColor.primaryText,
@@ -187,10 +194,54 @@ class _MyOrderViewState extends State<MyOrderView> {
                       Divider(color: Colors.grey),
                   itemBuilder: (context, index) {
                     var cObj = cart.items[index];
-                    return ListTile(
-                      title: Text('${cObj['name']}'),
-                      subtitle: Text(
-                          'Subscription Day: ${cObj['subscriptionDay']} \nMeal Option: ${cObj['mealOption']}'),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 16.0), // Add horizontal padding
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${cObj['name']}',
+                            style: TextStyle(
+                              color: TColor.primaryText,
+                              fontSize: 13,
+                              fontWeight: FontWeight
+                                  .bold, // Set the font weight to bold for the food name
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Quantity: ${cObj['quantity']}',
+                            style: TextStyle(
+                              color: TColor.primaryText,
+                              fontSize: 13,
+                              fontWeight: FontWeight
+                                  .normal, // Set the font weight to normal for quantity
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Subscription Day: ${cObj['subscriptionDay']}',
+                            style: TextStyle(
+                              color: TColor.primaryText,
+                              fontSize: 13,
+                              fontWeight: FontWeight
+                                  .normal, // Set the font weight to normal for subscription day
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Meal Option: ${cObj['mealOption']}',
+                            style: TextStyle(
+                              color: TColor.primaryText,
+                              fontSize: 13,
+                              fontWeight: FontWeight
+                                  .normal, // Set the font weight to normal for meal option
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -212,14 +263,46 @@ class _MyOrderViewState extends State<MyOrderView> {
                               fontWeight: FontWeight.w700),
                         ),
                         TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Show a dialog for user input
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Add Delivery Instructions'),
+                                  content: TextField(
+                                    decoration: InputDecoration(
+                                        hintText: 'Enter instructions here'),
+                                    onChanged: (text) {
+                                      // Handle the user input
+                                    },
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text(
+                                        'Save',
+                                        style: TextStyle(
+                                            color: Colors
+                                                .green), // Change the color to green light
+                                      ),
+                                      onPressed: () {
+                                        // Save the user input
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           icon: Icon(Icons.add, color: TColor.primary),
                           label: Text(
                             "Add Notes",
                             style: TextStyle(
-                                color: TColor.primary,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500),
+                              color: TColor.primary,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         )
                       ],
@@ -235,7 +318,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total",
+                          "Sub Total",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: TColor.primaryText,
@@ -246,7 +329,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                           "Rp ${NumberFormat("#,##0", "id_ID").format(cart.getTotalPrice())}", // Replace this line
                           style: TextStyle(
                               color: TColor.primary,
-                              fontSize: 22,
+                              fontSize: 13,
                               fontWeight: FontWeight.w700),
                         )
                       ],
@@ -266,7 +349,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                               fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          "\$2",
+                          "Rp $formattedDeliveryCost",
                           style: TextStyle(
                               color: TColor.primary,
                               fontSize: 13,
@@ -288,15 +371,16 @@ class _MyOrderViewState extends State<MyOrderView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total",
+                          "Total Price",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: TColor.primaryText,
                               fontSize: 13,
                               fontWeight: FontWeight.w700),
                         ),
+                        Spacer(), // Add Spacer widget to push the total price to the right
                         Text(
-                          "\$70",
+                          "Rp $formattedTotalPrice",
                           style: TextStyle(
                               color: TColor.primary,
                               fontSize: 22,
