@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_button.dart';
+import 'package:food_delivery/models/cart_model.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import 'checkout_view.dart';
 
@@ -12,16 +15,10 @@ class MyOrderView extends StatefulWidget {
 }
 
 class _MyOrderViewState extends State<MyOrderView> {
-  List itemArr = [
-    {"name": "Beef Burger", "qty": "1", "price": 16.0},
-    {"name": "Classic Burger", "qty": "1", "price": 14.0},
-    {"name": "Cheese Chicken Burger", "qty": "1", "price": 17.0},
-    {"name": "Chicken Legs Basket", "qty": "1", "price": 15.0},
-    {"name": "French Fires Large", "qty": "1", "price": 6.0}
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartModel>(context);
+
     return Scaffold(
       backgroundColor: TColor.white,
       body: SingleChildScrollView(
@@ -185,45 +182,17 @@ class _MyOrderViewState extends State<MyOrderView> {
                 child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount: itemArr.length,
-                  separatorBuilder: ((context, index) => Divider(
-                        indent: 25,
-                        endIndent: 25,
-                        color: TColor.secondaryText.withOpacity(0.5),
-                        height: 1,
-                      )),
-                  itemBuilder: ((context, index) {
-                    var cObj = itemArr[index] as Map? ?? {};
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 25),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "${cObj["name"].toString()} x${cObj["qty"].toString()}",
-                              style: TextStyle(
-                                  color: TColor.primaryText,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            "\$${cObj["price"].toString()}",
-                            style: TextStyle(
-                                color: TColor.primaryText,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
+                  itemCount: cart.items.length,
+                  separatorBuilder: (context, index) =>
+                      Divider(color: Colors.grey),
+                  itemBuilder: (context, index) {
+                    var cObj = cart.items[index];
+                    return ListTile(
+                      title: Text('${cObj['name']}'),
+                      subtitle: Text(
+                          'Subscription Day: ${cObj['subscriptionDay']} \nMeal Option: ${cObj['mealOption']}'),
                     );
-                  }),
+                  },
                 ),
               ),
               Padding(
@@ -266,7 +235,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Sub Total",
+                          "Total",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: TColor.primaryText,
@@ -274,10 +243,10 @@ class _MyOrderViewState extends State<MyOrderView> {
                               fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          "\$68",
+                          "Rp ${NumberFormat("#,##0", "id_ID").format(cart.getTotalPrice())}", // Replace this line
                           style: TextStyle(
                               color: TColor.primary,
-                              fontSize: 13,
+                              fontSize: 22,
                               fontWeight: FontWeight.w700),
                         )
                       ],

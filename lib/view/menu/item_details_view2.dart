@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:food_delivery/common_widget/round_icon_button.dart';
 import 'package:intl/intl.dart';
+import 'package:food_delivery/models/cart_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/color_extension.dart';
 import '../more/my_order_view2.dart';
@@ -31,9 +33,23 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
     unitPrice = widget.menuItem['price'] ?? 0;
     totalPrice = unitPrice;
     originalPrice = widget.menuItem['price'] ?? 0;
+    // Inside any method
+  }
+
+  void addToCart() {
+    final cart = Provider.of<CartModel>(context, listen: false);
+    cart.addItem({
+      'name': widget.menuItem['name'],
+      'price': widget.menuItem['price'],
+      'qty': qty, // This is the number of portions
+      'subscriptionDay': _selectedSubscription,
+      'mealOption': _selectedMealOption,
+    });
   }
 
   Widget _buildDescription() {
+    final cart = Provider.of<CartModel>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(
@@ -560,12 +576,14 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                                     width: 130,
                                                     height: 25,
                                                     child: RoundIconButton(
-                                                        title: "Add to Cart",
-                                                        icon:
-                                                            "assets/img/shopping_add.png",
-                                                        color: TColor.primary,
-                                                        onPressed: () {}),
-                                                  )
+                                                      title: "Add to Cart",
+                                                      icon:
+                                                          "assets/img/shopping_add.png",
+                                                      color: TColor.primary,
+                                                      onPressed:
+                                                          addToCart, // Panggil fungsi addToCart di sini
+                                                    ),
+                                                  ),
                                                 ],
                                               )),
                                           InkWell(
