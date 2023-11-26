@@ -158,11 +158,15 @@ class _MenuViewState extends State<MenuView> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Image.asset(
-                                    mObj["image"].toString(),
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.contain,
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Adjust the value as needed
+                                    child: Image.asset(
+                                      mObj["image"].toString(),
+                                      width: 80,
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                   const SizedBox(
                                     width: 15,
