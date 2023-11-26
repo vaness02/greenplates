@@ -3,7 +3,7 @@ import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_textfield.dart';
 
 import '../../common_widget/menu_item_row2.dart';
-import '../more/my_order_view2.dart';
+import '../more/my_order_view.dart';
 import 'item_details_view2.dart';
 
 class DietSouthView extends StatefulWidget {
@@ -18,14 +18,14 @@ class _DietSouthViewState extends State<DietSouthView> {
 
   List dietSouthItemsArr = [
     {
-      "image": "assets/img/South_food1.jpg",
+      "image": "assets/img/south_food1.png",
       "name": "Shrimp and Broccoli Stir-fry",
       "description":
           "Diet South adalah diet resmi yang dikembangkan oleh South Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.8",
       "rating": "120",
       "type": "South Kitchen",
-      "food_type": "Lunch",
+      "food_type": "",
       "nutrition": [
         "Calories: 300",
         "Protein: 10g",
@@ -41,14 +41,14 @@ class _DietSouthViewState extends State<DietSouthView> {
       },
     },
     {
-      "image": "assets/img/South_food2.jpg",
+      "image": "assets/img/south_food2.png",
       "name": "Turkey and Veggie Skewers",
       "description":
           "Diet South adalah diet resmi yang dikembangkan oleh South Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.9",
       "rating": "130",
       "type": "South Kitchen",
-      "food_type": "Dinner",
+      "food_type": "",
       "nutrition": [
         "Calories: 400",
         "Protein: 30g",
@@ -64,14 +64,14 @@ class _DietSouthViewState extends State<DietSouthView> {
       },
     },
     {
-      "image": "assets/img/South_food3.jpg",
+      "image": "assets/img/south_food3.png",
       "name": "Eggplant Lasagna",
       "description":
           "Diet South adalah diet resmi yang dikembangkan oleh South Clinic berbasis di Amerika, berdasarkan penelitian dan pengalaman klinis. Diet ini berfokus pada makan makanan sehat yang rasanya enak dan meningkatkan aktivitas fisik. Ini menekankan bahwa cara terbaik untuk menjaga berat badan adalah dengan mengubah gaya hidup Anda dan mengadopsi kebiasaan kesehatan yang baru.",
       "rate": "4.7",
       "rating": "110",
       "type": "South Kitchen",
-      "food_type": "Dinner",
+      "food_type": "",
       "nutrition": [
         "Calories: 250",
         "Protein: 8g",

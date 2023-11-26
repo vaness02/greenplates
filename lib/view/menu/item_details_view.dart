@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:food_delivery/common_widget/round_icon_button.dart';
+import 'package:food_delivery/models/cart_model.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/color_extension.dart';
 import '../more/my_order_view.dart';
@@ -18,6 +20,7 @@ class ItemDetailsView extends StatefulWidget {
 class _ItemDetailsViewState extends State<ItemDetailsView> {
   int price = 0;
   int qty = 1;
+  int finalPrice = 0;
   bool isFav = false;
 
   @override
@@ -25,6 +28,49 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
     super.initState();
     // Setel harga dari widget.menuItem
     price = widget.menuItem['price'] ?? 0;
+  }
+
+  void showAddedToCartNotification(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Added to Cart'),
+        duration: Duration(seconds: 2), // Sesuaikan durasi notifikasi
+        backgroundColor:
+            Colors.green, // Sesuaikan warna notifikasi dengan keinginan Anda
+      ),
+    );
+  }
+
+  void addToCart() {
+    final cart = Provider.of<CartModel>(context, listen: false);
+    String size = cart.selectedSize;
+    finalPrice = getFinalPrice(size);
+    print('finalPrice: $finalPrice'); // Add this line
+    var item = {
+      'name': widget.menuItem['name'],
+      'price': price,
+      'quantity': qty,
+      'size': size,
+      'totalPrice': finalPrice, // Add this line
+      // other fields...
+    };
+    cart.addItem(item);
+    showAddedToCartNotification(context);
+  }
+
+  void onSizeSelected(String size) {
+    context.read<CartModel>().setSelectedSize(size);
+    // Update finalPrice based on the selected size
+    finalPrice = getFinalPrice(context.read<CartModel>().selectedSize);
+  }
+
+  int getFinalPrice(String size) {
+    int finalPrice = price;
+    if (size == 'Big') {
+      finalPrice += 15000; // Add Rp 15.000 to the price if the size is 'big'
+    }
+    finalPrice *= qty; // Multiply by quantity
+    return finalPrice;
   }
 
   Widget build(BuildContext context) {
@@ -137,7 +183,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          "Rp ${NumberFormat("#,##0", "id_ID").format(price)}",
+                                          "Rp ${NumberFormat("#,##0", "id_ID").format(getFinalPrice(context.read<CartModel>().selectedSize))}",
                                           style: TextStyle(
                                             color: TColor.primaryText,
                                             fontSize: 31,
@@ -180,7 +226,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 25),
                                 child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare leo non mollis id cursus. Eu euismod faucibus in leo malesuada",
+                                  widget.menuItem["description"].toString(),
                                   style: TextStyle(
                                       color: TColor.secondaryText,
                                       fontSize: 12),
@@ -240,7 +286,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                   "Customize your Order",
                                   style: TextStyle(
                                       color: TColor.primaryText,
-                                      fontSize: 14,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ),
@@ -250,78 +296,60 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  decoration: BoxDecoration(
-                                      color: TColor.textfield,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                      isExpanded: true,
-                                      items: ["small", "Big"].map((e) {
-                                        return DropdownMenuItem(
-                                          value: e,
-                                          child: Text(
-                                            e,
-                                            style: TextStyle(
-                                                color: TColor.primaryText,
-                                                fontSize: 14),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: (val) {},
-                                      hint: Text(
-                                        "- Select the size of portion -",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: TColor.secondaryText,
-                                            fontSize: 14),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Select Size :", // Tambahkan teks di sini
+                                      style: TextStyle(
+                                        color: TColor.primaryText,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(
+                                        height:
+                                            8), // Beri sedikit ruang antara teks dan DropdownButton
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      decoration: BoxDecoration(
+                                        color: TColor.textfield,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButton(
+                                          isExpanded: true,
+                                          items: ["Small", "Big"].map((e) {
+                                            return DropdownMenuItem(
+                                              value: e,
+                                              child: Text(
+                                                e,
+                                                style: TextStyle(
+                                                  color: TColor.primaryText,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (val) {
+                                            // Setel ukuran yang dipilih ke CartModel
+                                            onSizeSelected(val as String);
+                                          },
+                                          value: context
+                                              .watch<CartModel>()
+                                              .selectedSize,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
                                 ),
                               ),
                               const SizedBox(
-                                height: 15,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  decoration: BoxDecoration(
-                                      color: TColor.textfield,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                      isExpanded: true,
-                                      items: ["small", "Big"].map((e) {
-                                        return DropdownMenuItem(
-                                          value: e,
-                                          child: Text(
-                                            e,
-                                            style: TextStyle(
-                                                color: TColor.primaryText,
-                                                fontSize: 14),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: (val) {},
-                                      hint: Text(
-                                        "- Select the ingredients -",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: TColor.secondaryText,
-                                            fontSize: 14),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 25,
+                                height: 20,
                               ),
                               Padding(
                                 padding:
@@ -483,7 +511,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                                     height: 15,
                                                   ),
                                                   Text(
-                                                    "Rp ${NumberFormat("#,##0", "id_ID").format(price * qty)}",
+                                                    "Rp ${NumberFormat("#,##0", "id_ID").format(getFinalPrice(context.read<CartModel>().selectedSize) * qty)}",
                                                     style: TextStyle(
                                                       color: TColor.primaryText,
                                                       fontSize: 21,
@@ -502,7 +530,27 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                                         icon:
                                                             "assets/img/shopping_add.png",
                                                         color: TColor.primary,
-                                                        onPressed: () {}),
+                                                        onPressed: () {
+                                                          Provider.of<CartModel>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .addItem({
+                                                            'name':
+                                                                widget.menuItem[
+                                                                    'name'],
+                                                            'price': getFinalPrice(context
+                                                                .read<
+                                                                    CartModel>()
+                                                                .selectedSize),
+                                                            'quantity': qty,
+                                                            'size': context
+                                                                .read<
+                                                                    CartModel>()
+                                                                .selectedSize,
+                                                          });
+                                                          showAddedToCartNotification(
+                                                              context);
+                                                        }),
                                                   )
                                                 ],
                                               )),
@@ -596,12 +644,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyOrderView()));
-                        },
+                        onPressed: () {},
                         icon: Image.asset(
                           "assets/img/shopping_cart.png",
                           width: 25,

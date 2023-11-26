@@ -3,7 +3,7 @@ import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_textfield.dart';
 
 import '../../common_widget/menu_item_row2.dart';
-import '../more/my_order_view2.dart';
+import '../more/my_order_view.dart';
 import 'item_details_view2.dart';
 
 class DietAtkinView extends StatefulWidget {
@@ -41,14 +41,14 @@ class _DietAtkinViewState extends State<DietAtkinView> {
       },
     },
     {
-      "image": "assets/img/Atkin_food2.jpg",
+      "image": "assets/img/atkin_food2.png",
       "name": "Chicken Asem with Sauteed Long Beans",
       "description":
           "Diet Atkin adalah salah satu diet rendah karbohidrat yang paling terkenal. Jika Anda sering mengkonsumsi karbohidrat olahan seperti roti putih, pasta, kentang, dan tidak makan banyak buah dan sayuran, maka diet ini mungkin menjadi langkah awal yang Anda butuhkan untuk menurunkan berat badan. Jutaan orang telah menurunkan berat badan dengan Atkin.",
       "rate": "4.9",
       "rating": "130",
       "type": "Atkin Kitchen",
-      "food_type": "Dinner",
+      "food_type": "",
       "nutrition": [
         "Calories: 400",
         "Protein: 30g",
@@ -64,14 +64,14 @@ class _DietAtkinViewState extends State<DietAtkinView> {
       },
     },
     {
-      "image": "assets/img/Atkin_food3.jpg",
+      "image": "assets/img/atkin_food3.png",
       "name": "Brown Rice with Grilled Gurame and Tofu",
       "description":
           "Diet Atkin adalah salah satu diet rendah karbohidrat yang paling terkenal. Jika Anda sering mengkonsumsi karbohidrat olahan seperti roti putih, pasta, kentang, dan tidak makan banyak buah dan sayuran, maka diet ini mungkin menjadi langkah awal yang Anda butuhkan untuk menurunkan berat badan. Jutaan orang telah menurunkan berat badan dengan Atkin.",
       "rate": "4.7",
       "rating": "110",
       "type": "Atkin Kitchen",
-      "food_type": "Dinner",
+      "food_type": "",
       "nutrition": [
         "Calories: 250",
         "Protein: 8g",

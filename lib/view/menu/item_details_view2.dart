@@ -6,7 +6,7 @@ import 'package:food_delivery/models/cart_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/color_extension.dart';
-import '../more/my_order_view2.dart';
+import '../more/my_order_view.dart';
 
 class ItemDetailsView extends StatefulWidget {
   final Map menuItem;
@@ -46,16 +46,15 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
       final cart = Provider.of<CartModel>(context, listen: false);
       if (qty != null && qty > 0) {
         // Validate the qty value
-        cart.addItem({
+        var item = {
           'name': widget.menuItem['name'],
           'price': widget.menuItem['price'],
           'quantity': qty,
           'subscriptionDay': _selectedSubscription,
           'mealOption': _selectedMealOption,
-        });
-      } else {
-        // Handle the case where qty is null or not a valid numeric value
-        // You can show an error message to the user or handle it based on your application's logic
+          'totalPrice': totalPrice * qty, // Add total price to the item
+        };
+        cart.addItem(item);
       }
     }
   }

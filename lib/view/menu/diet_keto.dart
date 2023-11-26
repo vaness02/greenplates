@@ -3,7 +3,7 @@ import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_textfield.dart';
 
 import '../../common_widget/menu_item_row2.dart';
-import '../more/my_order_view2.dart';
+import '../more/my_order_view.dart';
 import 'item_details_view2.dart';
 
 class DietKetoView extends StatefulWidget {

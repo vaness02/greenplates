@@ -20,83 +20,139 @@ class _MenuItemsViewState extends State<MenuItemsView> {
   List menuItemsArr = [
     {
       "image": "assets/img/breakfast1.png",
-      "name": "Oatmeal dengan Buah-buahan Segar dan Kacang",
+      "name": "Oatmeal",
       "rate": "4.9",
       "rating": "124",
       "type": "Minute by tuk tuk",
       "food_type": "Breakfast",
-      "nutrition": ["Calories: 300","Protein: 10g","Fat: 8g","Fiber: 6g","Carbs: 45g"],
-      "price": 50000
+      "nutrition": [
+        "Calories: 300",
+        "Protein: 10g",
+        "Fat: 8g",
+        "Fiber: 6g",
+        "Carbs: 45g"
+      ],
+      "price": 50000,
+      "description": "Oatmeal dengan Buah-buahan Segar dan Kacang",
     },
     {
       "image": "assets/img/breakfast2.png",
-      "name": "Sandwich Gandum Utuh dengan Telur Rebus dan Sayuran",
+      "name": "Sandwich Gandum",
       "rate": "4.9",
       "rating": "124",
       "type": "Cakes by Tella",
       "food_type": "Breakfast",
-      "nutrition": ["Calories: 350","Protein: 20g","Fat: 12g","Fiber: 5g","Carbs: 30g"],
-      "price": 45000
+      "nutrition": [
+        "Calories: 350",
+        "Protein: 20g",
+        "Fat: 12g",
+        "Fiber: 5g",
+        "Carbs: 30g"
+      ],
+      "price": 45000,
+      "description": "Sandwich Gandum Utuh dengan Telur Rebus dan Sayuran",
     },
     {
       "image": "assets/img/lunch1.png",
-      "name": "Salmon Panggang dengan Ubi Jalar dan Brokoli Kukus",
+      "name": "Salmon Panggang",
       "rate": "4.9",
       "rating": "124",
       "type": "Café Racer",
       "food_type": "Lunch",
-      "nutrition": ["Calories: 450","Protein: 30g","Fat: 20g","Fiber: 7g","Carbs: 35g"],
-      "price": 135000
+      "nutrition": [
+        "Calories: 450",
+        "Protein: 30g",
+        "Fat: 20g",
+        "Fiber: 7g",
+        "Carbs: 35g"
+      ],
+      "price": 135000,
+      "description": "Salmon Panggang dengan Ubi Jalar dan Brokoli Kukus",
     },
     {
       "image": "assets/img/lunch2.png",
-      "name": "Quinoa Bowl dengan Kacang Hitam, Alpukat, dan Salsa",
+      "name": "Quinoa Bowl",
       "rate": "4.9",
       "rating": "124",
       "type": "Minute by tuk tuk",
       "food_type": "Lunch",
-      "nutrition": ["Calories: 380","Protein: 20g","Fat: 15g","Fiber: 12g","Carbs: 40g"],
-      "price": 150000
+      "nutrition": [
+        "Calories: 380",
+        "Protein: 20g",
+        "Fat: 15g",
+        "Fiber: 12g",
+        "Carbs: 40g"
+      ],
+      "price": 150000,
+      "description": "Quinoa Bowl dengan Kacang Hitam, Alpukat, dan Salsa",
     },
     {
       "image": "assets/img/snacks2.png",
-      "name": "Roti Renyah Multigrain dengan Irisan Alpukat dan Tomat",
+      "name": "Roti Renyah",
       "rate": "4.9",
       "rating": "124",
       "type": "Minute by tuk tuk",
       "food_type": "Snacks",
-      "nutrition": ["Calories: 180","Protein: 4g","Fat: 10g","Fiber: 5g","Carbs: 20g"],
-      "price": 47000
+      "nutrition": [
+        "Calories: 180",
+        "Protein: 4g",
+        "Fat: 10g",
+        "Fiber: 5g",
+        "Carbs: 20g"
+      ],
+      "price": 47000,
+      "description": "Roti Renyah Multigrain dengan Irisan Alpukat dan Tomat",
     },
     {
       "image": "assets/img/snacks1.png",
-      "name": "Muffin Pisang Oatmeal Tanpa Terigu",
+      "name": "Muffin Pisang",
       "rate": "4.9",
       "rating": "124",
       "type": "Cakes by Tella",
       "food_type": "Snacks",
-      "nutrition": ["Calories: 200","Protein: 6g","Fat: 10g","Fiber: 4g","Carbs: 25g"],
-      "price": 43000
+      "nutrition": [
+        "Calories: 200",
+        "Protein: 6g",
+        "Fat: 10g",
+        "Fiber: 4g",
+        "Carbs: 25g"
+      ],
+      "price": 43000,
+      "description": "Muffin Pisang Oatmeal Tanpa Terigu",
     },
     {
       "image": "assets/img/dinner1.png",
-      "name": "Burger Kalkun Panggang dengan Roti Gandum Utuh dan Salad",
+      "name": "Burger Kalkun",
       "rate": "4.9",
       "rating": "124",
       "type": "Café Racer",
       "food_type": "Dinner",
-      "nutrition": ["Calories: 400","Protein: 20g","Fat: 15g","Fibre: 6g","Carbs: 35g"],
-      "price": 30000
+      "nutrition": [
+        "Calories: 400",
+        "Protein: 20g",
+        "Fat: 15g",
+        "Fibre: 6g",
+        "Carbs: 35g"
+      ],
+      "price": 30000,
+      "description": "Burger Kalkun Panggang dengan Roti Gandum Utuh dan Salad",
     },
     {
       "image": "assets/img/dinner2.png",
-      "name": "Salmon Panggang dengan Umbi Jalar dan Asparagus",
+      "name": "Salmon Panggang",
       "rate": "4.9",
       "rating": "124",
       "type": "Minute by tuk tuk",
       "food_type": "Dinner",
-      "nutrition": ["Calories: 450","Protein: 25g","Fat: 20g","Fibre: 7g","Carbs: 30g"],
-      "price": 150000
+      "nutrition": [
+        "Calories: 450",
+        "Protein: 25g",
+        "Fat: 20g",
+        "Fibre: 7g",
+        "Carbs: 30g"
+      ],
+      "price": 150000,
+      "description": "Salmon Panggang dengan Umbi Jalar dan Asparagus",
     },
   ];
 
