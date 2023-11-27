@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common/locator.dart';
 import 'package:food_delivery/common/service_call.dart';
+import 'package:food_delivery/view/login/login_view.dart';
 import 'package:food_delivery/view/login/welcome_view.dart';
 import 'package:food_delivery/view/main_tabview/main_tabview.dart';
 import 'package:food_delivery/view/on_boarding/startup_view.dart';
@@ -27,7 +28,7 @@ void main() async {
   }
 
   runApp(const MyApp(
-    defaultHome: MainTabView(),
+    defaultHome: LoginView(),
   ));
 
   runApp(ChangeNotifierProvider(

@@ -60,6 +60,7 @@ class _MainTabViewState extends State<MainTabView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              const SizedBox(width: 0),
               TabButton(
                   title: "Menu",
                   icon: "assets/img/tab_menu.png",
@@ -73,23 +74,10 @@ class _MainTabViewState extends State<MainTabView> {
                     }
                   },
                   isSelected: selctTab == 0),
-              TabButton(
-                  title: "Offer",
-                  icon: "assets/img/tab_offer.png",
-                  onTap: () {
-                    if (selctTab != 1) {
-                      selctTab = 1;
-                      selectPageView = const OfferView();
-                    }
-                    if (mounted) {
-                      setState(() {});
-                    }
-                  },
-                  isSelected: selctTab == 1),
-        
-        
-                const  SizedBox(width: 40, height: 40, ),
-        
+              const SizedBox(
+                width: 40,
+                height: 40,
+              ),
               TabButton(
                   title: "Profile",
                   icon: "assets/img/tab_profile.png",
@@ -109,7 +97,7 @@ class _MainTabViewState extends State<MainTabView> {
                   onTap: () {
                     if (selctTab != 4) {
                       selctTab = 4;
-                      selectPageView = const  MoreView();
+                      selectPageView = const MoreView();
                     }
                     if (mounted) {
                       setState(() {});

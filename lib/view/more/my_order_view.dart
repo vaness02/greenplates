@@ -4,6 +4,7 @@ import 'package:food_delivery/common_widget/round_button.dart';
 import 'package:food_delivery/models/cart_model.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:food_delivery/common/globs.dart';
 
 import 'checkout_view.dart';
 
@@ -15,7 +16,37 @@ class MyOrderView extends StatefulWidget {
 }
 
 class _MyOrderViewState extends State<MyOrderView> {
-  final int deliveryCost = 50000; // Define delivery cost
+  final int deliveryCost = 50000;
+
+  void checkout() {
+    if (Globs.isGuest) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(Globs.appName),
+            content: Text("Please sign up or log in to checkout."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    // Navigate to CheckoutView
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CheckoutView()),
+    );
+  } // Define delivery cost
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartModel>(context);
@@ -447,17 +478,8 @@ class _MyOrderViewState extends State<MyOrderView> {
                       height: 25,
                     ),
                     RoundButton(
-                        title: "Checkout",
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CheckoutView(),
-                            ),
-                          );
-                        }),
-                    const SizedBox(
-                      height: 20,
+                      title: "Checkout",
+                      onPressed: checkout,
                     ),
                   ],
                 ),
