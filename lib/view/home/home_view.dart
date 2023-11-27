@@ -5,7 +5,7 @@ import 'package:food_delivery/view/menu/diet_keto.dart';
 import 'package:food_delivery/view/menu/diet_mayo.dart';
 import 'package:food_delivery/view/menu/diet_atkin.dart';
 import 'package:food_delivery/view/menu/diet_south.dart';
-import 'package:food_delivery/view/menu/menu_items_view.dart';
+import 'package:food_delivery/view/menu/menu_items_view_2.dart';
 
 import '../../common/globs.dart';
 import '../../common/service_call.dart';
@@ -44,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
     },
     {
       "image": "assets/img/res_2.png",
-      "name": "Café de Noir",
+      "name": "Café Racer",
       "rate": "4.9",
       "rating": "124",
       "type": "Cafa",
@@ -52,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
     },
     {
       "image": "assets/img/res_3.png",
-      "name": "Bakes by Tella",
+      "name": "Cakes by Tella",
       "rate": "4.9",
       "rating": "124",
       "type": "Cafa",
@@ -71,7 +71,7 @@ class _HomeViewState extends State<HomeView> {
     },
     {
       "image": "assets/img/m_res_2.png",
-      "name": "Café de Noir",
+      "name": "Café Racer",
       "rate": "4.9",
       "rating": "124",
       "type": "Cafa",
@@ -278,52 +278,17 @@ class _HomeViewState extends State<HomeView> {
                     var pObj = popArr[index] as Map? ?? {};
                     return PopularRestaurantRow(
                       pObj: pObj,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MenuItemsView(mObj: pObj),
+                          ),
+                        );
+                      },
                     );
                   }),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: ViewAllTitleRow(
-                    title: "Most Popular",
-                    onView: () {},
-                  ),
-                ),
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    itemCount: mostPopArr.length,
-                    itemBuilder: ((context, index) {
-                      var mObj = mostPopArr[index] as Map? ?? {};
-                      return MostPopularCell(
-                        mObj: mObj,
-                        onTap: () {},
-                      );
-                    }),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: ViewAllTitleRow(
-                    title: "Recent Items",
-                    onView: () {},
-                  ),
-                ),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  itemCount: recentArr.length,
-                  itemBuilder: ((context, index) {
-                    var rObj = recentArr[index] as Map? ?? {};
-                    return RecentItemRow(
-                      rObj: rObj,
-                      onTap: () {},
-                    );
-                  }),
-                )
               ],
             ),
           ),

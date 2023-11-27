@@ -5,7 +5,7 @@ import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common/extension.dart';
 import 'package:food_delivery/common_widget/round_button.dart';
 import 'package:food_delivery/view/login/login_view.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../common/globs.dart';
 import '../../common/service_call.dart';
 import '../../common_widget/round_textfield.dart';
@@ -28,7 +28,6 @@ class _SignUpViewState extends State<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -91,7 +90,7 @@ class _SignUpViewState extends State<SignUpView> {
                 controller: txtPassword,
                 obscureText: true,
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               RoundTextfield(
@@ -102,15 +101,17 @@ class _SignUpViewState extends State<SignUpView> {
               const SizedBox(
                 height: 25,
               ),
-              RoundButton(title: "Sign Up", onPressed: () {
-                btnSignUp();
-                //  Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) => const OTPView(),
-                //       ),
-                //     );
-              }),
+              RoundButton(
+                  title: "Sign Up",
+                  onPressed: () {
+                    btnSignUp();
+                    //  Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const OTPView(),
+                    //       ),
+                    //     );
+                  }),
               const SizedBox(
                 height: 30,
               ),
@@ -151,8 +152,7 @@ class _SignUpViewState extends State<SignUpView> {
   }
 
   //TODO: Action
-  void btnSignUp() {
-
+  void btnSignUp() async {
     if (txtName.text.isEmpty) {
       mdShowAlert(Globs.appName, MSG.enterName, () {});
       return;
@@ -185,43 +185,22 @@ class _SignUpViewState extends State<SignUpView> {
 
     endEditing();
 
-    serviceCallSignUp({
-      "name": txtName.text,
-
-      "mobile": txtMobile.text,
-      "email": txtEmail.text,
-      "address": txtAddress.text,
-      "password": txtPassword.text,
-      "push_token": "",
-      "device_type": Platform.isAndroid ? "A" : "I"
-    });
-  }
-
-  //TODO: ServiceCall
-
-  void serviceCallSignUp(Map<String, dynamic> parameter) {
-    Globs.showHUD();
-
-    ServiceCall.post(parameter, SVKey.svSignUp,
-        withSuccess: (responseObj) async {
-      Globs.hideHUD();
-      if (responseObj[KKey.status] == "1") {
-        Globs.udSet(responseObj[KKey.payload] as Map? ?? {}, Globs.userPayload);
-        Globs.udBoolSet(true, Globs.userLogin);
-        
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const OnBoardingView(),
-            ),
-            (route) => false);
-      } else {
-        mdShowAlert(Globs.appName,
-            responseObj[KKey.message] as String? ?? MSG.fail, () {});
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: txtEmail.text,
+        password: txtPassword.text,
+      );
+      // User registered successfully
+      // You can now navigate to another screen or do something else
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
       }
-    }, failure: (err) async {
-      Globs.hideHUD();
-      mdShowAlert(Globs.appName, err.toString(), () {});
-    });
+    } catch (e) {
+      print(e);
+    }
   }
 }
